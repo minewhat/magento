@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    MineWhat
+ * @package     MineWhat_Insights
+ * @copyright   Copyright (c) MineWhat
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <MineWhat_Insights>
+            <version>1.0.0.0</version>
+        </MineWhat_Insights>
+    </modules>
+    <global>
+        <models>
+            <minewhat_insights>
+                <class>MineWhat_Insights_Model</class>
+            </minewhat_insights>
+        </models>
+        <blocks>
+            <minewhat_insights>
+                <class>MineWhat_Insights_Block</class>
+            </minewhat_insights>
+        </blocks>
+        <helpers>
+            <minewhat_insights>
+                <class>MineWhat_Insights_Helper</class>
+            </minewhat_insights>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <minewhat_insights>
+                    <file>minewhat_insights.xml</file>
+                </minewhat_insights>
+            </updates>
+        </layout>
+        <events>
+            <checkout_cart_product_add_after>
+                <observers>
+                    <minewhat_insights_log_cart_add>
+                        <type>singleton</type>
+                        <class>minewhat_insights/observer</class>
+                        <method>logCartAdd</method>
+                    </minewhat_insights_log_cart_add>
+                </observers>
+            </checkout_cart_product_add_after>
+        </events>
+    </frontend>
+    <default>
+        <minewhat_insights>
+            <settings>
+                <active>0</active>
+                <base_script></base_script>
+            </settings>
+        </minewhat_insights>
+    </default>
+</config>

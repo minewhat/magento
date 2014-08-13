@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <MineWhat_Insights>
+            <active>true</active>
+            <codePool>community</codePool>
+        </MineWhat_Insights>
+    </modules>
+</config>

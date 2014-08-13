@@ -1,0 +1,61 @@
+<?php
+/**
+ * @category    MineWhat
+ * @package     MineWhat_Insights
+ * @copyright   Copyright (c) MineWhat
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php $_product = $this->getCurrentProduct() ?>
+<?php if ($_product) { ?>
+  <?php
+  $_associated_products = $this->getAssociatedProducts($_product);
+  $associated_ids = array();
+
+  $mwdata = array();
+  $mwdata['product'] = array();
+  $mwdata['associated_products'] = array();
+
+  $mwdata['product']['id'] = $_product->getId();
+  $mwdata['product']['sku'] = $_product->getSku();
+
+  $categories = $_product->getCategoryCollection()->addAttributeToSelect('name');
+
+  $mwdata['product']['cat'] = array();
+  foreach($categories as $category) {
+    $mwdata['product']['cat'][] = $category->getName();
+  }
+
+  $mwdata['product']['price'] = $_product->getPrice();
+
+  foreach($_associated_products as $simple_product) {
+    $product_info = array();
+    $associated_ids[] = $simple_product->getId();
+    $product_info['id'] = $simple_product->getId();
+    $product_info['sku'] = $simple_product->getSku();
+    $product_info['price'] = $simple_product->getPrice();
+    $mwdata['associated_products'][] = $product_info;
+  }
+
+  ?>
+  <script type="text/mwdata">
+    //<![CDATA[
+
+    <?php
+    try {
+      echo json_encode($mwdata);
+    } catch(Exception $exception) {
+
+    }
+    ?>
+
+    //]]>
+  </script>
+
+  <script type="text/javascript">
+    //<![CDATA[
+    var _mwapi = _mwapi || [];
+    _mwapi.push(['trackEvent', 'product', {pid: '<?php echo $_product->getId() ?>', associated_ids: '<?php echo json_encode($associated_ids) ?>'}]);
+    //]]>
+  </script>
+<?php } ?>
