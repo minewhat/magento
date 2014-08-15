@@ -24,7 +24,7 @@ class MineWhat_Insights_Block_Event_Catalog_Product_View extends Mage_Core_Block
       $simple_collection = $conf->getUsedProductCollection()->addAttributeToSelect(array('id', 'sku', 'price'))->addFilterByRequiredOptions();
       return $simple_collection;
     } else {
-      return null;
+      return array();
     }
 
   }
