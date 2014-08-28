@@ -1,1 +1,18 @@
 <?php echo Mage::helper('minewhat_insights')->getBaseScript() ?>
+
+<?php
+  $user = $this->getUser();
+  if($user) {
+    $email = $user->getEmail();
+    if ($email && strlen($email) > 0) {
+      ?>
+        <script type="text/javascript">
+        //<![CDATA[
+        window._mwapi = window._mwapi || [];
+        _mwapi.push(['trackUser', '<?php echo $email ?>']);
+        //]]>
+        </script>
+      <?php
+    }
+  }
+?>

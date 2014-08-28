@@ -20,4 +20,12 @@ class MineWhat_Insights_Block_Base_Script extends Mage_Core_Block_Template {
     return parent::_toHtml();
   }
 
+  public function getUser() {
+    if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+      $user = Mage::getSingleton('customer/session')->getCustomer();
+      return $user;
+    }
+    return null;
+  }
+
 }
