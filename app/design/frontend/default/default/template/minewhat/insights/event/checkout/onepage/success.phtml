@@ -15,7 +15,7 @@
       products.push({pid: '<?php echo $product["id"] ?>', qty: '<?php echo intval($product["qty"]) ?>', sku: '<?php echo $product["sku"] ?>', price: '<?php echo $product["price"] ?>', parent_pid: '<?php echo $product["parentId"] ?>', bundle: '<?php echo json_encode($product["bundle"]) ?>'});
     <?php } ?>
 
-    _mwapi.push(['trackEvent', 'buy', {products: products, order: {order_number: '<?php echo $orderInfo["orderId"] ?>', created_at: '<?php echo $orderInfo["createdAt"] ?>', email: '<?php echo $orderInfo["email"] ?>'}, platform: "magento"}]);
+    _mwapi.push(['trackEvent', 'buy', {products: products, order: {order_number: '<?php echo $orderInfo["orderId"] ?>', created_at: '<?php echo $orderInfo["createdAt"] ?>', email: '<?php echo $orderInfo["email"] ?>'}, platform: 'magento', currency: '<?php echo $orderInfo["currency"] ?>'}]);
 
     //]]>
   </script>

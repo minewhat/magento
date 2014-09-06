@@ -77,6 +77,11 @@ class MineWhat_Insights_Block_Event_Checkout_Onepage_Success extends Mage_Core_B
       $orderInfo['email'] = $order->getCustomerEmail();
       $orderInfo['createdAt'] = $order->getCreatedAt();
 
+      $currency = $order->getOrderCurrency();
+      if (is_object($currency)) {
+        $orderInfo['currency'] = $currency->getCurrencyCode();
+      }
+
       return $orderInfo;
     }
 
