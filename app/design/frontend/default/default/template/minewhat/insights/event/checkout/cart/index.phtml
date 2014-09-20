@@ -8,10 +8,10 @@
 ?>
 <?php $_product = $this->getProductToShoppingCart() ?>
 <?php if ($_product && $_product["id"]) { ?>
-  <script type="text/javascript">
-    //<![CDATA[
-    var _mwapi = _mwapi || [];
-    _mwapi.push(['trackEvent', 'addtocart', {pid: '<?php echo $_product["id"] ?>', sku: '<?php echo $_product["sku"] ?>', parent_pid: '<?php echo $_product["parentId"] ?>', qty: '<?php echo $_product["qty"] ?>', bundle: '<?php echo json_encode($_product["bundle"]) ?>'}]);
-    //]]>
-  </script>
+<script type="text/javascript">
+//<![CDATA[
+	var _mwapi = _mwapi || [];
+    	_mwapi.push(['trackEvent', 'addtocart', {pid: '<?php echo $_product["id"] ?>', sku: '<?php echo $_product["sku"] ?>', parent_pid: '<?php echo $_product["parentId"] ?>', qty: '<?php echo $_product["qty"] ?>', bundle: '<?php echo json_encode($_product["bundle"]) ?>'}]);
+//]]>
+</script>
 <?php } ?>

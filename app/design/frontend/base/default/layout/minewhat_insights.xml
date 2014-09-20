@@ -8,29 +8,29 @@
  */
 -->
 <layout version="0.1.0">
+    
+	<catalog_product_view>
+		<reference name="head">
+		    	<block type="minewhat_insights/event_catalog_product_view" name="minewhat_insights_event_catalog_product_view" />
+		</reference>
+	</catalog_product_view>
 
-    <catalog_product_view>
-        <reference name="head">
-            <block type="minewhat_insights/event_catalog_product_view" name="minewhat_insights_event_catalog_product_view" />
-        </reference>
-    </catalog_product_view>
+	<checkout_cart_index>
+		<reference name="head">
+		    	<block type="minewhat_insights/event_checkout_cart_index" name="minewhat_insights_event_checkout_cart_index" />
+		</reference>
+	</checkout_cart_index>
 
-    <checkout_cart_index>
-        <reference name="head">
-            <block type="minewhat_insights/event_checkout_cart_index" name="minewhat_insights_event_checkout_cart_index" />
-        </reference>
-    </checkout_cart_index>
+	<checkout_onepage_success>
+		<reference name="head">
+		    	<block type="minewhat_insights/event_checkout_onepage_success" name="minewhat_insights_event_checkout_onepage_success" />
+		</reference>
+	</checkout_onepage_success>
 
-    <checkout_onepage_success>
-        <reference name="head">
-            <block type="minewhat_insights/event_checkout_onepage_success" name="minewhat_insights_event_checkout_onepage_success" />
-        </reference>
-    </checkout_onepage_success>
-
-    <default>
-        <reference name="before_body_end">
-            <block type="minewhat_insights/base_script" name="minewhat_insights_base_script" />
-        </reference>
-    </default>
+	<default>
+		<reference name="before_body_end">
+		    	<block type="minewhat_insights/base_script" name="minewhat_insights_base_script" />
+		</reference>
+    	</default>
 
 </layout>

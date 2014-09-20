@@ -31,6 +31,15 @@
         </helpers>
     </global>
     <frontend>
+        <routers>
+            <minewhat>
+                <use>standard</use>
+                <args>
+                    <module>MineWhat_Insights</module>
+                    <frontName>minewhat</frontName>
+                </args>
+            </minewhat>
+        </routers>
         <layout>
             <updates>
                 <minewhat_insights>
@@ -47,7 +56,7 @@
                         <method>logCartAdd</method>
                     </minewhat_insights_log_cart_add>
                 </observers>
-            </checkout_cart_product_add_after>
+            </checkout_cart_product_add_after> 
         </events>
     </frontend>
     <default>

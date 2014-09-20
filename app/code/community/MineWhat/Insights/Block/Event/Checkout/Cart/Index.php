@@ -8,25 +8,25 @@
  */
 class MineWhat_Insights_Block_Event_Checkout_Cart_Index extends Mage_Core_Block_Template {
 
-  protected function _construct() {
-    parent::_construct();
-    $this->setTemplate('minewhat/insights/event/checkout/cart/index.phtml');
-  }
+	protected function _construct() {
+		parent::_construct();
+		$this->setTemplate('minewhat/insights/event/checkout/cart/index.phtml');
+	}
 
-  public function getProductToShoppingCart() {
-    if (($product = Mage::getModel('core/session')->getProductToShoppingCart())) {
-      Mage::getModel('core/session')->unsProductToShoppingCart();
-      return $product;
-    }
+	public function getProductToShoppingCart() {
+		if (($product = Mage::getModel('core/session')->getProductToShoppingCart())) {
+			    Mage::getModel('core/session')->unsProductToShoppingCart();
+			    return $product;
+		}
 
-    return null;
-  }
+		return null;
+	}
 
-  protected function _toHtml() {
-    if (!$this->helper('minewhat_insights')->isModuleOutputEnabled()) {
-      return '';
-    }
-    return parent::_toHtml();
-  }
+	protected function _toHtml() {
+		if (!$this->helper('minewhat_insights')->isModuleOutputEnabled()) {
+		    return '';
+		}
+		return parent::_toHtml();
+    	}
 
 }
