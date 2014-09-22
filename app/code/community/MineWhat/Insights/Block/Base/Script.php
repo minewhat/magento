@@ -8,24 +8,24 @@
  */
 class MineWhat_Insights_Block_Base_Script extends Mage_Core_Block_Template {
 
-    protected function _construct() {
-        parent::_construct();
-        $this->setTemplate('minewhat/insights/base/script.phtml');
-    }
+  protected function _construct() {
+    parent::_construct();
+    $this->setTemplate('minewhat/insights/base/script.phtml');
+  }
 
-    protected function _toHtml() {
-        if (!$this->helper('minewhat_insights')->isModuleOutputEnabled()) {
-            return '';
-        }
-        return parent::_toHtml();
+  protected function _toHtml() {
+    if (!$this->helper('minewhat_insights')->isModuleOutputEnabled()) {
+      return '';
     }
-    
-    public function getUser() {
-        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
-          $user = Mage::getSingleton('customer/session')->getCustomer();
-          return $user;
-        }
-        return null;
+    return parent::_toHtml();
+  }
+
+  public function getUser() {
+    if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+      $user = Mage::getSingleton('customer/session')->getCustomer();
+      return $user;
     }
+    return null;
+  }
 
 }

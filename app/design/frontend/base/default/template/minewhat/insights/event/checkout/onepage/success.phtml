@@ -7,15 +7,16 @@
  */
 ?>
 <?php if (($orderInfo = $this->getOrderInfo())) { ?>
-<script type="text/javascript">
-//<![CDATA[
-	var _mwapi = _mwapi || [];
-	var products = [];
-	<?php foreach ($orderInfo['items'] as $product) { ?>
-		products.push({pid: '<?php echo $product["id"] ?>', qty: '<?php echo intval($product["qty"]) ?>', sku: '<?php echo $product["sku"] ?>', price: '<?php echo $product["price"] ?>', parent_pid: '<?php echo $product["parentId"] ?>', bundle: '<?php echo json_encode($product["bundle"]) ?>'});
-	<?php } ?>
-  	_mwapi.push(['trackEvent', 'buy', {products: products, order: {order_number: '<?php echo $orderInfo["orderId"] ?>', created_at: '<?php echo $orderInfo["createdAt"] ?>', email: '<?php echo $orderInfo["email"] ?>'}, platform: 'magento', currency: '<?php echo $orderInfo["currency"] ?>'}]);
+  <script type="text/javascript">
+    //<![CDATA[
+    var _mwapi = _mwapi || [];
+    var products = [];
+    <?php foreach ($orderInfo['items'] as $product) { ?>
+    		products.push({pid: '<?php echo $product["id"] ?>', qty: '<?php echo intval($product["qty"]) ?>', sku: '<?php echo $product["sku"] ?>', price: '<?php echo $product["price"] ?>', parent_pid: '<?php echo $product["parentId"] ?>', bundle: '<?php echo json_encode($product["bundle"]) ?>'});
+    <?php } ?>
 
-//]]>
-</script>
+    _mwapi.push(['trackEvent', 'buy', {products: products, order: {order_number: '<?php echo $orderInfo["orderId"] ?>', payment: '<?php echo $orderInfo["paymentMethod"] ?>', created_at: '<?php echo $orderInfo["createdAt"] ?>', email: '<?php echo $orderInfo["email"] ?>'}, platform: 'magento', currency: '<?php echo $orderInfo["currency"] ?>'}]);
+
+    //]]>
+  </script>
 <?php } ?>
