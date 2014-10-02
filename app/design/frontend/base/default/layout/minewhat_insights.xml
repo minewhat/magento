@@ -28,7 +28,7 @@
     </checkout_onepage_success>
 
     <default>
-        <reference name="before_body_end">
+        <reference name="head">
             <block type="minewhat_insights/base_script" name="minewhat_insights_base_script" />
         </reference>
     </default>
