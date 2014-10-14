@@ -211,6 +211,49 @@ class MineWhat_Insights_ApiController extends Mage_Core_Controller_Front_Action 
 
     }
 
+    public function stockAction() {
+
+       try {
+
+           if(!$this->_authorise()) {
+               return $this;
+           }
+
+           $productId = $this->getRequest()->getParam('pid');
+           
+
+           if(!$productId || strlen($productId) <= 0) {
+               
+               $this->getResponse()
+               ->setBody(json_encode(array('status' => 'error', 'message' => 'product id required')))
+               ->setHttpResponseCode(500)
+               ->setHeader('Content-type', 'application/json', true);    
+
+           } else {
+
+               // get stock info
+               $stockObj = Mage::getModel('cataloginventory/stock_item')->loadByProduct($productId);
+               $stock = $stockObj->getQty();
+               
+               $this->getResponse()
+                   ->setBody(json_encode(array('id' => $productId, 'stock' => $stock)))
+                   ->setHttpResponseCode(200)
+                   ->setHeader('Content-type', 'application/json', true);            
+       
+           }
+
+       } catch(Exception $e) {
+           $this->getResponse()
+               ->setBody(json_encode(array('status' => 'error', 'message' => 'Internal server error')))
+               ->setHttpResponseCode(500)
+               ->setHeader('Content-type', 'application/json', true);
+       }
+       
+       return $this;
+
+    }
+
+
     private function getFormatedProduct($product, $extras, $allAttrs) {
 
         $formatedProduct = null;
@@ -228,12 +271,24 @@ class MineWhat_Insights_ApiController extends Mage_Core_Controller_Front_Action 
                 'image'         =>  $product->getImageUrl(),
                 'url'           =>  $product->getProductUrl(),
                 'info'          =>  $product->getShortDescription(),
-                'status'        =>  $product->getStatus()
+                'status'        =>  $product->getStatus(),
+		            'type'		      =>  $product->getTypeId()
             );
+
             if(!$formatedProduct['manufacturer'] || strlen($formatedProduct['manufacturer']) === 0) {
                 $product = Mage::getModel('catalog/product')->load($product->getId());
                 $formatedProduct['manufacturer'] = $product->getAttributeText('manufacturer');
             }
+
+	          if($formatedProduct['type'] == "configurable") {
+               // get associated product ids
+               $associatedProducts = Mage::getModel('catalog/product_type_configurable')->getChildrenIds($formatedProduct['id']);
+               $formatedProduct['associated_products'] = $associatedProducts;          
+            }
+
+            // get stock info
+            $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product);
+            $formatedProduct['stock'] = $stock->getQty();
 
             if($allAttrs) {
                 $attributes = $product->getAttributes();
