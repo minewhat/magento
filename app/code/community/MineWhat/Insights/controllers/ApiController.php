@@ -25,13 +25,18 @@ class MineWhat_Insights_ApiController extends Mage_Core_Controller_Front_Action 
             return false;
         }
 
-        $authHeader = $this->getRequest()->getHeader('authorization');
+        $authHeader = $this->getRequest()->getHeader('mwauth');
+
+        // fallback
+        if (!$authHeader || strlen($authHeader) == 0) {
+          $authHeader = $this->getRequest()->getParam('mwauth');
+        }
 
         if (!$authHeader) {
             Mage::log('Unable to extract authorization header from request', null, 'minewhat.log');
             // Internal server error
             $this->getResponse()
-                    ->setBody(json_encode(array('status' => 'error', 'message' => 'Internal server error')))
+                    ->setBody(json_encode(array('status' => 'error', 'message' => 'Internal server error, Authorization header not found')))
                     ->setHttpResponseCode(500)
                     ->setHeader('Content-type', 'application/json', true);
             return false;
