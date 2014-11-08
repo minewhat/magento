@@ -73,7 +73,7 @@ class MineWhat_Insights_Block_Event_Checkout_Onepage_Success extends Mage_Core_B
 
       }
 
-      $orderInfo['orderId'] = $lastOrderId;
+      $orderInfo['orderId'] = $order->getIncrementId();
       $orderInfo['email'] = $order->getCustomerEmail();
       $orderInfo['createdAt'] = $order->getCreatedAt();
 
@@ -91,10 +91,23 @@ class MineWhat_Insights_Block_Event_Checkout_Onepage_Success extends Mage_Core_B
   }
 
   protected function _toHtml() {
-    if (!$this->helper('minewhat_insights')->isModuleOutputEnabled()) {
-      return '';
+    if (!$this->helper('minewhat_insights')->isModuleOutputEnabled() || !$this->isOrderConfirmation()) {
+        return '';
     }
     return parent::_toHtml();
+  }
+
+  protected function isOrderConfirmation() {
+    return strpos($this->_getRouteName(), 'checkout') !== false
+          && $this->_getActionName() == 'success';
+  }
+
+  protected function _getRouteName() {
+    return $this->getRequest()->getRequestedRouteName();
+  }
+
+  protected function _getActionName() {
+    return $this->getRequest()->getRequestedActionName();
   }
 
 }

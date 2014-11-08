@@ -22,14 +22,17 @@
     </checkout_cart_index>
 
     <checkout_onepage_success>
-        <reference name="head">
-            <block type="minewhat_insights/event_checkout_onepage_success" name="minewhat_insights_event_checkout_onepage_success" />
-        </reference>
+        <!--<reference name="head">-->
+            <!--<block type="minewhat_insights/event_checkout_onepage_success" name="minewhat_insights_event_checkout_onepage_success" />-->
+        <!--</reference>-->
     </checkout_onepage_success>
 
     <default>
         <reference name="head">
             <block type="minewhat_insights/base_script" name="minewhat_insights_base_script" />
+        </reference>
+        <reference name="head">
+            <block type="minewhat_insights/event_checkout_onepage_success" name="minewhat_insights_event_checkout_onepage_success" />
         </reference>
     </default>
 

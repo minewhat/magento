@@ -44,7 +44,7 @@
                             <show_in_store>1</show_in_store>
                         </base_script>
                         <api_key translate="label">
-                            <label>Api Key</label>
+                            <label>Domain Key</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
